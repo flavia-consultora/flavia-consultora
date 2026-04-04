@@ -974,10 +974,28 @@
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
   // Form submit
-  function handleSubmit(e) {
-    e.preventDefault();
-    document.getElementById('contact-form').style.display = 'none';
+  async function handleSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const data = {
+    nome: document.getElementById('nome').value,
+    email: document.getElementById('email').value,
+    empresa: document.getElementById('empresa').value,
+    servico: document.getElementById('servico').value,
+    mensagem: document.getElementById('mensagem').value,
+  };
+
+  const res = await fetch('https://formspree.io/f/mreoogdw', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+
+  if (res.ok) {
+    form.style.display = 'none';
     document.getElementById('success-msg').style.display = 'block';
+  }
+}
   }
 
   // Smooth scroll for nav links
