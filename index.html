@@ -894,7 +894,7 @@
       <ul class="contacto-info">
         <li>
           <span class="ci-label">Email</span>
-          <span class="ci-value"><a href="/cdn-cgi/l/email-protection#197f75786f70784678756f7c6a59766c6d7576767237696d"><span class="__cf_email__" data-cfemail="20464c415649417f414c564553604f55544c4f4f4b0e5054">[email&#160;protected]</span></a></span>
+          <span class="ci-value"><a href="mailto:flavia_alves@outlook.pt">flavia_alves@outlook.pt</a></span>
         </li>
         <li>
           <span class="ci-label">LinkedIn</span>
@@ -960,7 +960,7 @@
   <span>© 2026 · Porto, Portugal</span>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   // Intersection observer for fade-up
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -974,40 +974,22 @@
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
   // Form submit
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
-    const btn = document.querySelector('.form-submit');
-    btn.textContent = 'A enviar…';
-    btn.disabled = true;
-
-    const data = {
-      nome:     document.getElementById('nome').value,
-      email:    document.getElementById('email').value,
-      empresa:  document.getElementById('empresa').value,
-      servico:  document.getElementById('servico').value,
-      mensagem: document.getElementById('mensagem').value,
-    };
-
-    try {
-      const res = await fetch('https://formspree.io/f/mreoogdw', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(data),
-      });
-
-      if (res.ok) {
-        document.getElementById('contact-form').style.display = 'none';
-        document.getElementById('success-msg').style.display = 'block';
-      } else {
-        btn.textContent = 'Erro ao enviar. Tenta novamente.';
-        btn.disabled = false;
-      }
-    } catch (err) {
-      btn.textContent = 'Erro de ligação. Tenta novamente.';
-      btn.disabled = false;
-    }
+    document.getElementById('contact-form').style.display = 'none';
+    document.getElementById('success-msg').style.display = 'block';
   }
 
   // Smooth scroll for nav links
   document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
